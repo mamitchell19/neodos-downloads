@@ -15,7 +15,7 @@ NeoDOS is a modern, DOS-style operating system that starts from a USB stick - no
    Windows may say "Windows protected your PC" because the program is new: click *More info*, then *Run anyway*.
 2. Click **Download** - it fetches the newest NeoDOS by itself and checks it is undamaged.
    (Or choose a NeoDOS-x.y-Live-USB.zip you already downloaded - no need to unzip it.)
-3. Plug in a USB stick (at least 1 GB; everything on it is erased), choose it and click **Write**.
+3. Plug in a USB stick (at least 512 MB; everything on it is erased), choose it and click **Write**.
    The stick is read back afterwards to make sure everything arrived.
 
 Only USB drives are offered, so your computer's own disks cannot be erased by mistake.
