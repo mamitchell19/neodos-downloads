@@ -1,0 +1,16 @@
+NEW IN 3.5: processors that choose their own speed and report their temperature
+  * On Intel processors from about 2015 on (Skylake and later - ThinkPad P51/P52, T470, X1 Carbon 5th generation
+    and newer) NeoDOS lets the processor pick its speed itself, many times a second: slow and cool when there is
+    little to do, full speed with turbo when a program needs it. Without this the processor stays at the one
+    speed the PC's firmware chose. CPU shows the speed range. Normally (CPU SPEED AUTO) a laptop favours saving
+    power while it runs on battery and is balanced while the power adapter is plugged in - it switches by itself
+    within 10 seconds. CPU SPEED FAST, BALANCED or SAVE picks one for good (until CPU SPEED AUTO). On older Intel
+    processors CPU SPEED sets their energy hint. Virtual machines and AMD processors are left as they are. If a PC
+    misbehaves, the boot option speed=fixed (or safe) leaves the speed exactly as the firmware set it.
+  * Processors with nothing to do now really rest: on a PC with several processors, the idle ones switch their
+    timer off instead of waking up 100 times a second, and are woken the moment there is work for them. CPU
+    shows how many are resting; CPU IDLE HLT (or idle=hlt) keeps the timers running if a PC misbehaves.
+  * CPU and POWER show the processor's temperature from its own thermometer (Intel processors since about 2006),
+    also on laptops whose firmware reports no temperatures, and say plainly when it is hot or slowing itself
+    down because of the heat (then check the fan and the air vents).
+

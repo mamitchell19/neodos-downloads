@@ -1,0 +1,44 @@
+# Publishes the files in files/ as a GitHub Release. Nothing is compiled here: the zips are built and fully
+# tested elsewhere (the private NeoDOS repository's cloud build) and committed to files/ as they are.
+#
+#   files/NeoDOS-<version>-Live-USB.zip   the live USB stick (the newest one decides the release: v<version>)
+#   files/NeoDOS-USB-Creator.zip          the Windows program that writes it to a stick
+#   files/notes.txt                       the release notes ("NEW IN <version>" from the NeoDOS README)
+#
+# A new version creates the tag and the Release; a later push for the same version (e.g. a newer USB Creator)
+# replaces the files on that Release. NeoDOS USB Creator downloads from .../releases/latest.
+name: Publish
+
+on:
+  push:
+    branches: [main]
+    paths: ['files/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish the newest version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          LIVE=$(ls files/NeoDOS-*-Live-USB.zip | sort -V | tail -1)
+          V=$(basename "$LIVE" | sed 's/^NeoDOS-\(.*\)-Live-USB\.zip$/\1/')
+          echo "Version $V from $LIVE"
+          FILES="$LIVE"
+          [ -f files/NeoDOS-USB-Creator.zip ] && FILES="$FILES files/NeoDOS-USB-Creator.zip"
+          [ -s files/notes.txt ] || echo "NeoDOS $V" > files/notes.txt
+          if gh release view "v$V" >/dev/null 2>&1; then
+            echo "Release v$V exists - replacing its files"
+            gh release upload "v$V" $FILES --clobber
+            gh release edit "v$V" --notes-file files/notes.txt
+          else
+            gh release create "v$V" $FILES --target "$GITHUB_SHA" --title "NeoDOS $V" --notes-file files/notes.txt --latest
+          fi
