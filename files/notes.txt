@@ -1,8 +1,5 @@
-NEW IN 3.6: wired network on modern laptops
-  * The network port built into most laptops and office PCs since 2013 (Intel I217, I218 and I219 - e.g. ThinkPad
-    P51 and P52) now works when Windows or the PC's management engine left it asleep: NeoDOS wakes it the way
-    Intel's own drivers do, switches it to full power and waits long enough (up to 7 seconds) for the cable to
-    come up. "IPCONFIG /ALL" shows the adapter's details if there is still no connection - a photo of them helps
-    to find out why.
-  * NeoDOS USB Creator 1.2 writes sticks on Windows 11 too (1.1 stopped at 4 MB with error 38).
-
+NEW IN 3.7: a tidier stick in Windows
+  * Windows used to give the NeoDOS stick three drive letters and offer to format two of them (small start-up
+    areas it cannot read - formatting one could stop the stick from starting). Now it shows only NEOSETTINGS.
+  * If NeoDOS ever stops with a "system halted" screen on a live stick, the crash report is now also saved as
+    CRASH.TXT on the NEOSETTINGS drive, so it can be opened and sent from Windows.
