@@ -1,5 +1,8 @@
-NEW IN 3.7: a tidier stick in Windows
-  * Windows used to give the NeoDOS stick three drive letters and offer to format two of them (small start-up
-    areas it cannot read - formatting one could stop the stick from starting). Now it shows only NEOSETTINGS.
-  * If NeoDOS ever stops with a "system halted" screen on a live stick, the crash report is now also saved as
-    CRASH.TXT on the NEOSETTINGS drive, so it can be opened and sent from Windows.
+NEW IN 3.8: steadier start-up on real PCs
+  * PCs with a lot of memory (64 GB or more, such as a ThinkPad P52 with 128 GB) place some devices - the sound
+    chip, the USB 3 controller, the network chip, the screen's brightness control - above the first 4 GB. NeoDOS
+    now uses their full address there; before, it could crash during start-up on such a PC.
+  * If a processor lists a feature that the PC's firmware has locked, NeoDOS now leaves that feature alone instead
+    of stopping (processor speed control, energy hint, temperature sensor).
+  * The "Safe mode" start-up entry now really leaves the processor's speed and deep sleep to the firmware, as
+    the boot options safe, idle=hlt and speed=fixed always promised (they were read too late before).
