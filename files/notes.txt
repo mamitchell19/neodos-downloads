@@ -1,8 +1,10 @@
-NEW IN 3.8: steadier start-up on real PCs
-  * PCs with a lot of memory (64 GB or more, such as a ThinkPad P52 with 128 GB) place some devices - the sound
-    chip, the USB 3 controller, the network chip, the screen's brightness control - above the first 4 GB. NeoDOS
-    now uses their full address there; before, it could crash during start-up on such a PC.
-  * If a processor lists a feature that the PC's firmware has locked, NeoDOS now leaves that feature alone instead
-    of stopping (processor speed control, energy hint, temperature sensor).
-  * The "Safe mode" start-up entry now really leaves the processor's speed and deep sleep to the firmware, as
-    the boot options safe, idle=hlt and speed=fixed always promised (they were read too late before).
+NEW IN 3.9: USB Wi-Fi sticks
+  * Wi-Fi for PCs whose built-in card NeoDOS cannot drive: USB Wi-Fi sticks with the MediaTek MT7601U chip (many
+    of the cheapest "150 Mbps" sticks, e.g. ASUS USB-N10 Nano B1, D-Link DWA-127 rev B, Edimax EW-7711MAC, and
+    unbranded ones listed as "MT7601"). Plug the stick in (USB RESCAN if NeoDOS is already running), then use the
+    same commands as for a built-in card: WIFI SCAN, WIFI CONNECT "name" "password", WIFI DISCONNECT.
+    Open and WPA2 (AES) networks work; the stick sends at 24 Mbit/s (802.11g), so expect about 1-2 MB/s.
+    Not yet tried with a real stick: it was tested against a software model of the stick and of access points.
+    When a laptop has both a supported built-in card and a stick, NeoDOS uses the built-in card.
+  * Through the stick, NeoDOS also answers when the access point renews its group key (every hour on many routers),
+    so the connection keeps receiving broadcasts after that.
