@@ -1,10 +1,12 @@
-NEW IN 3.9: USB Wi-Fi sticks
-  * Wi-Fi for PCs whose built-in card NeoDOS cannot drive: USB Wi-Fi sticks with the MediaTek MT7601U chip (many
-    of the cheapest "150 Mbps" sticks, e.g. ASUS USB-N10 Nano B1, D-Link DWA-127 rev B, Edimax EW-7711MAC, and
-    unbranded ones listed as "MT7601"). Plug the stick in (USB RESCAN if NeoDOS is already running), then use the
-    same commands as for a built-in card: WIFI SCAN, WIFI CONNECT "name" "password", WIFI DISCONNECT.
-    Open and WPA2 (AES) networks work; the stick sends at 24 Mbit/s (802.11g), so expect about 1-2 MB/s.
-    Not yet tried with a real stick: it was tested against a software model of the stick and of access points.
-    When a laptop has both a supported built-in card and a stick, NeoDOS uses the built-in card.
-  * Through the stick, NeoDOS also answers when the access point renews its group key (every hour on many routers),
-    so the connection keeps receiving broadcasts after that.
+NEW IN 3.10: faster, steadier USB Wi-Fi
+  * The MT7601U stick now joins 802.11n networks (one stream, 20 MHz, up to 65 Mbit/s) with QoS, and picks its
+    sending speed by itself: it tries faster rates now and then and stays at the one that gets the most through
+    (WIFI shows the current rate, e.g. "sending at 52 (MCS 5) Mbit/s"). Networks without 802.11n use 6-54 Mbit/s.
+  * It keeps its radio in trim while it runs, as the chip maker intends: receiver gain from the access point's
+    signal, baseband settings and calibration as the stick warms up or cools down, the crystal frequency against the
+    access point's, and - on sticks built for it - closed-loop control of the transmit power. WIFI shows the stick's
+    temperature change.
+  * Packets the access point bundles together (A-MSDU) are taken apart; block-acknowledgement requests are declined
+    politely, so the access point simply sends single frames.
+  * Still tested only against a software model of the stick and of access points, not a real stick.
+
